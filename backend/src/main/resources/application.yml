@@ -1,0 +1,28 @@
+server:
+  port: 8080
+
+spring:
+  datasource:
+    url: jdbc:postgresql://localhost:5432/portfolio_db
+    username: postgres
+    password: 4497
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    show-sql: false
+
+flyway:
+  enabled: true
+  locations: classpath:db/migration
+
+app:
+  jwt:
+    # 64-character secret (512 bits)
+    secret: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+    expiration-ms: 86400000
+
+logging:
+  level:
+    root: INFO
+    com.example: DEBUG
