@@ -1,0 +1,15 @@
+/* Global styles & theme variables */
+:root {
+  --primary: #0d6efd;
+  --bg: #0f1724;
+  --surface: #111827;
+  --text: #e6eef8;
+}
+
+body {
+  margin: 0;
+  font-family: Roboto, Arial, sans-serif;
+  background: var(--bg);
+  color: var(--text);
+}
+
