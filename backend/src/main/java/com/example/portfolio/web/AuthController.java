@@ -3,7 +3,6 @@ package com.example.portfolio.web;
 import com.example.portfolio.domain.User;
 import com.example.portfolio.repository.UserRepository;
 import com.example.portfolio.security.JwtUtil;
-import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.web.bind.annotation.*;
