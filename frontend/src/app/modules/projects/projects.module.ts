@@ -1,11 +1,16 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { ProjectsListComponent } from './components/projects-list/projects-list.component';
+import { RouterModule, Routes } from '@angular/router';
+import { ProjectListComponent } from './components/project-list/project-list.component';
+import { ProjectDetailComponent } from './components/project-detail/project-detail.component';
+
+const routes: Routes = [
+  { path: '', component: ProjectListComponent },
+  { path: ':id', component: ProjectDetailComponent }
+];
 
 @NgModule({
-  declarations: [ProjectsListComponent],
-  imports: [CommonModule, RouterModule.forChild([{ path: '', component: ProjectsListComponent }])]
+  declarations: [ProjectListComponent, ProjectDetailComponent],
+  imports: [CommonModule, RouterModule.forChild(routes)]
 })
 export class ProjectsModule { }
-
