@@ -25,7 +25,7 @@ public class BlogController extends GenericCrudController<BlogDto> {
     }
 
     @GetMapping("/category/{category}")
-    public ResponseEntity<List<BlogDto>> getByCategory(@PathVariable String category) {
+    public ResponseEntity<List<BlogDto>> getByCategory(@PathVariable("category") String category) {
         return ResponseEntity.ok(blogService.listByCategory(category));
     }
 }

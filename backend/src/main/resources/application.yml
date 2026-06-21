@@ -3,9 +3,9 @@ server:
 
 spring:
   datasource:
-    url: jdbc:postgresql://localhost:5432/portfolio_db
-    username: postgres
-    password: 4497
+    url: ${SPRING_DATASOURCE_URL:jdbc:postgresql://localhost:5432/portfolio_db}
+    username: ${SPRING_DATASOURCE_USERNAME:postgres}
+    password: ${SPRING_DATASOURCE_PASSWORD:4497}
 
   jpa:
     hibernate:
@@ -18,8 +18,7 @@ flyway:
 
 app:
   jwt:
-    # 64-character secret (512 bits)
-    secret: 0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef
+    secret: ${JWT_SECRET:0123456789abcdef0123456789abcdef0123456789abcdef0123456789abcdef}
     expiration-ms: 86400000
 
 logging:

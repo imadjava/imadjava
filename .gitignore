@@ -1,5 +1,9 @@
 # Java/Maven
 target/
+frontend/.angular/
+frontend/node_modules/
+frontend/dist/
+frontend-backup-before-zip/
 pom.xml.tag
 pom.xml.releaseBackup
 pom.xml.versionsBackup
