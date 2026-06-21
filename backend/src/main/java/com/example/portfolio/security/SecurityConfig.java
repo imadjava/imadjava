@@ -3,6 +3,7 @@ package com.example.portfolio.security;
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -20,10 +21,12 @@ import java.util.List;
 @EnableWebSecurity
 @RequiredArgsConstructor
 public class SecurityConfig {
+
     private final JwtFilter jwtFilter;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+
         http
                 .cors(cors -> {})
                 .csrf(AbstractHttpConfigurer::disable)
@@ -33,6 +36,7 @@ public class SecurityConfig {
 
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(
+                                "/",
                                 "/api/v1/auth/**",
                                 "/v3/api-docs/**",
                                 "/swagger-ui/**",
@@ -41,19 +45,20 @@ public class SecurityConfig {
                                 "/sitemap.xml"
                         ).permitAll()
 
-                        .requestMatchers(org.springframework.http.HttpMethod.GET, "/api/v1/**")
+                        .requestMatchers(HttpMethod.GET, "/api/v1/**")
                         .permitAll()
 
-                        .requestMatchers(org.springframework.http.HttpMethod.POST, "/api/v1/**")
+                        .requestMatchers(HttpMethod.POST, "/api/v1/**")
                         .hasRole("ADMIN")
 
-                        .requestMatchers(org.springframework.http.HttpMethod.PUT, "/api/v1/**")
+                        .requestMatchers(HttpMethod.PUT, "/api/v1/**")
                         .hasRole("ADMIN")
 
-                        .requestMatchers(org.springframework.http.HttpMethod.DELETE, "/api/v1/**")
+                        .requestMatchers(HttpMethod.DELETE, "/api/v1/**")
                         .hasRole("ADMIN")
 
-                        .anyRequest().authenticated()
+                        .anyRequest()
+                        .authenticated()
                 )
 
                 .addFilterBefore(jwtFilter, UsernamePasswordAuthenticationFilter.class);
@@ -63,11 +68,13 @@ public class SecurityConfig {
 
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
+
         CorsConfiguration configuration = new CorsConfiguration();
 
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:4200",
-                "http://localhost"
+                "http://localhost",
+                "https://imadjava.vercel.app"
         ));
 
         configuration.setAllowedMethods(List.of(
@@ -79,6 +86,7 @@ public class SecurityConfig {
         ));
 
         configuration.setAllowedHeaders(List.of("*"));
+        configuration.setExposedHeaders(List.of("Authorization"));
         configuration.setAllowCredentials(true);
 
         UrlBasedCorsConfigurationSource source =
@@ -88,9 +96,9 @@ public class SecurityConfig {
 
         return source;
     }
+
     @Bean
     public BCryptPasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
 }
-
