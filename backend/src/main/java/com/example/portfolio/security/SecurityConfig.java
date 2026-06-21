@@ -74,7 +74,9 @@ public class SecurityConfig {
         configuration.setAllowedOrigins(List.of(
                 "http://localhost:4200",
                 "http://localhost",
-                "https://imadjava.vercel.app"
+                "https://imadjava.vercel.app",
+                "https://imadhub.com",
+                "https://www.imadhub.com"
         ));
 
         configuration.setAllowedMethods(List.of(
